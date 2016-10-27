@@ -1,0 +1,12 @@
+# Unix submit description file
+
+executable              = run_sort_index.sh 
+log                     = submit_sort_index.log
+output                  = submit_sort_index.out
+error                   = submit_sort_index.err
+request_cpus            = 10
+request_memory          = 40 GB
+notification            = Complete
+notify_user             = darakjia@ohsu.edu
+queue
+
