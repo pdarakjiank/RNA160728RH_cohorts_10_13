@@ -1,0 +1,11 @@
+# Unix submit description file
+
+executable              = run_star_alignment_MF5.sh 
+log                     = submit_run_star_alignment_MF5.log
+output                  = submit_run_star_alignment_MF5.out
+error                   = submit_run_star_alignment_MF5.err
+request_cpus = 10
+request_memory = 30 GB
+notification=Complete
+notify_user=darakjia@ohsu.edu
+queue
