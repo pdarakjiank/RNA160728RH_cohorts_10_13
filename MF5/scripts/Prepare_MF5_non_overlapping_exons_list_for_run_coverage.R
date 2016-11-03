@@ -55,8 +55,8 @@ gtf.ranges.df.unique<-gtf.ranges.df.unique[c(1,2,3,6,4,5)]
 gtf.ranges.df.unique$gene.names<-sub(" gene_symbol ","",gtf.ranges.df.unique$gene.names)
 
 # Generate bed files for exons overlapping between genes and for the original list of exons 
-write.table(gtf.ranges.gene.ovl.df,"MacaM/data/overlapping_exons_btwn_genes.bed",quote=F,col.names=F,row.names=F,sep="\t")
-write.table(gtf.ranges.df.unique,"MacaM/data/exons.bed",quote=F,col.names=F,row.names=F,sep="\t")
+write.table(gtf.ranges.gene.ovl.df,"MF5/data/overlapping_exons_btwn_genes.bed",quote=F,col.names=F,row.names=F,sep="\t")
+write.table(gtf.ranges.df.unique,"MF5/data/exons.bed",quote=F,col.names=F,row.names=F,sep="\t")
 
 # This was run to remove from original list just the portions of exons that overlap between genes
 #sort -k1,1 -k2,2n overlapping_exons_btwn_genes.bed > overlapping_exons_btwn_genes_sorted.bed
@@ -65,7 +65,7 @@ write.table(gtf.ranges.df.unique,"MacaM/data/exons.bed",quote=F,col.names=F,row.
 #/lawrencedata/darakjia/bedtools-2.17.0/bin/subtractBed -s -a exons_sorted.bed -b intersect.bed > non_overlapping_exons.bed
 
 # Get back the file with no gene overlaps
-no_gene_ovl_exons <- read.table("MacaM/data/non_overlapping_exons.bed")
+no_gene_ovl_exons <- read.table("MF5/data/non_overlapping_exons.bed")
 # Convert it to genomic ranges
 no.gene.ovl.exons.ranges<-GRanges(seqnames=Rle(no_gene_ovl_exons$V1),ranges=IRanges(start=no_gene_ovl_exons$V2,end=no_gene_ovl_exons$V3),strand=no_gene_ovl_exons$V7,gene.names=no_gene_ovl_exons$V5)
 
@@ -79,10 +79,10 @@ no.gene.ovl.exons.ranges.red.df<-as.data.frame(no.gene.ovl.exons.ranges.red)
 no.gene.ovl.exons.ranges.red.df<-no.gene.ovl.exons.ranges.red.df[c(3,4,5,2,6,7)]
 no.gene.ovl.exons.ranges.red.df$width<-0
 
-write.table(no.gene.ovl.exons.ranges.red.df,"MacaM/data/MacaM_reduced_non_overlapping_exons.txt", sep="\t",quote=F,col.names=F,row.names=F)
+write.table(no.gene.ovl.exons.ranges.red.df,"MF5/data/MF5_reduced_non_overlapping_exons.txt", sep="\t",quote=F,col.names=F,row.names=F)
 
 #Run coverage with bedtools
-#sort -k6 -k1,1 -k2,2n MacaM_reduced_non_overlapping_exons.txt > MacaM_reduced_non_overlapping_exons_sorted.bed
+#sort -k6 -k1,1 -k2,2n MF5_reduced_non_overlapping_exons.txt > MF5_reduced_non_overlapping_exons_sorted.bed
 
 #nohup ./run_bedtools_coverage.sh > run_bedtools_coverage.log 2>&1 </dev/null &
 
